@@ -1,6 +1,7 @@
 {
     "name": "prettus/laravel-validation",
-    "description": "",
+    "description": "Laravel Validation Service",
+    "keywords": ["laravel", "validation", "service"],
     "authors": [
         {
             "name": "Anderson Andrade",
