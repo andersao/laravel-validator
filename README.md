@@ -5,20 +5,20 @@
 [![Latest Unstable Version](https://poser.pugx.org/prettus/laravel-validation/v/unstable.svg)](https://packagist.org/packages/prettus/laravel-validation)
 [![License](https://poser.pugx.org/prettus/laravel-validation/license.svg)](https://packagist.org/packages/prettus/laravel-validation)
 
-## Instalação
+## Installation
 
-Edite o seu arquivo composer.json e adicione "prettus/laravel-repository": "dev-master" nas dependencias.
+Add "prettus/laravel-repository": "dev-master" to composer.json
  
     "prettus/laravel-validation": "dev-master"
     
-### Criar um Validator
+### Create a validator
 
-Um Validator pode conter regras de validação para criação e edição do seu model.
+The Validator contains rules for adding, editing.
 
     Prettus\Validator\Contracts\ValidatorInterface::RULE_CREATE
     Prettus\Validator\Contracts\ValidatorInterface::RULE_UPDATE
     
-O exemplo abaixo ira utilizar as regras que foram definidas tanto na criação, como na edição do model
+In the example below, we define some rules for both creation and edition
 
     <?php
     
@@ -34,7 +34,7 @@ O exemplo abaixo ira utilizar as regras que foram definidas tanto na criação, 
     
     }
 
-Para definir regras especificas, use :
+To define specific rules, proceed as shown below:
 
     <?php
     
@@ -55,7 +55,7 @@ Para definir regras especificas, use :
     
     }
     
-### Usando o Validator
+### Using the Validator
 
 <?php
     
@@ -131,7 +131,7 @@ Para definir regras especificas, use :
     }
     
 
-# Autor
+# Author
 
 Anderson Andrade - <contato@andersonandra.de>
 
