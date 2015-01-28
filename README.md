@@ -51,7 +51,7 @@ To define specific rules, proceed as shown below:
             ValidatorInterface::RULE_UPDATE => [
                 'title' => 'required'
             ]
-        )
+       ];
     
     }
     
