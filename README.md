@@ -26,11 +26,11 @@ In the example below, we define some rules for both creation and edition
     
     class PostValidator extends LaravelValidator {
     
-        protected $rules = array(
+        protected $rules = [
             'title' => 'required',
             'text'  => 'min:3',
             'author'=> 'required'
-        );
+        ];
     
     }
 
@@ -42,15 +42,15 @@ To define specific rules, proceed as shown below:
     
     class PostValidator extends LaravelValidator {
     
-        protected $rules = array(
-            ValidatorInterface::RULE_CREATE=>array(
+        protected $rules = [
+            ValidatorInterface::RULE_CREATE => [
                 'title' => 'required',
                 'text'  => 'min:3',
                 'author'=> 'required'
-            ),
-            ValidatorInterface::RULE_UPDATE=>array(
+            ],
+            ValidatorInterface::RULE_UPDATE => [
                 'title' => 'required'
-            )
+            ]
         )
     
     }
@@ -89,17 +89,17 @@ To define specific rules, proceed as shown below:
     
                 $post = $this->repository->create( Input::all() );
     
-                return Response::json(array(
+                return Response::json([
                     'message'=>'Post created',
                     'data'   =>$post->toArray()
-                ));
+                ]);
     
             } catch (ValidatorException $e) {
     
-                return Response::json(array(
+                return Response::json([
                     'error'   =>true,
                     'message' =>$e->getMessage()
-                ));
+                ]);
     
             }
         }
@@ -113,17 +113,17 @@ To define specific rules, proceed as shown below:
                 
                 $post = $this->repository->update( Input::all(), $id );
     
-                return Response::json(array(
+                return Response::json([
                     'message'=>'Post created',
                     'data'   =>$post->toArray()
-                ));
+                ]);
     
             }catch (ValidatorException $e){
     
-                return Response::json(array(
+                return Response::json([
                     'error'   =>true,
                     'message' =>$e->getMessage()
-                ));
+                ]);
     
             }
     
