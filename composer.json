@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Prettus\\Validator": "src/Prettus/Validator/"
+            "Prettus\\Validator\\": "src/Prettus/Validator/"
         }
     },
     "minimum-stability": "stable"
