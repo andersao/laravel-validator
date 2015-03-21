@@ -7,9 +7,9 @@
 
 ## Installation
 
-Add "prettus/laravel-repository": "dev-master" to composer.json
+Add "prettus/laravel-repository": "1.1.*" to composer.json
  
-    "prettus/laravel-validation": "dev-master"
+    "prettus/laravel-validation": "1.1.*"
     
 ### Create a validator
 
