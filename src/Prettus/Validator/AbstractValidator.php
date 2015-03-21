@@ -96,7 +96,8 @@ abstract class AbstractValidator implements ValidatorInterface {
     public function passesOrFail($action = null)
     {
         if(  !$this->passes($action) ){
-            throw new ValidatorException( $this->errors() );
+            $errors = is_array($this->errors()) ? implode("\n", $this->errors()) : $this->errors();
+            throw new ValidatorException( $errors );
         }
 
         return true;
