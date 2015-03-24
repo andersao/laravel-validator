@@ -111,7 +111,7 @@ abstract class AbstractValidator implements ValidatorInterface {
      * @param null $action
      * @return array
      */
-    protected function getRules($action = null){
+    public function getRules($action = null){
 
         $rules = $this->rules;
 
@@ -120,6 +120,18 @@ abstract class AbstractValidator implements ValidatorInterface {
         }
 
         return $this->parserValidationRules($rules, $this->id);
+    }
+
+    /**
+     * Set Rules for Validation
+     *
+     * @param array $rules
+     * @return $this
+     */
+    public function setRules(array $rules)
+    {
+        $this->rules = $rules;
+        return $this;
     }
 
     /**
