@@ -75,7 +75,17 @@ abstract class AbstractValidator implements ValidatorInterface {
      */
     public function errors()
     {
-        return $this->errors->all();
+        return $this->errorsBag()->all();
+    }
+
+    /**
+     * Errors
+     *
+     * @return MessageBag
+     */
+    public function errorsBag()
+    {
+        return $this->errors;
     }
 
     /**
@@ -96,8 +106,7 @@ abstract class AbstractValidator implements ValidatorInterface {
     public function passesOrFail($action = null)
     {
         if(  !$this->passes($action) ){
-            $errors = is_array($this->errors()) ? implode("\n", $this->errors()) : $this->errors();
-            throw new ValidatorException( $errors );
+            throw new ValidatorException( $this->errorsBag() );
         }
 
         return true;

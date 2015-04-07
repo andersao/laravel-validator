@@ -1,5 +1,6 @@
 <?php namespace Prettus\Validator\Contracts;
 
+use Illuminate\Contracts\Support\MessageBag;
 use Prettus\Validator\Exceptions\ValidatorException;
 
 /**
@@ -51,6 +52,13 @@ interface ValidatorInterface {
      * @return array
      */
     public function errors();
+
+    /**
+     * Errors
+     *
+     * @return MessageBag
+     */
+    public function errorsBag();
 
     /**
      * Set Rules for Validation
