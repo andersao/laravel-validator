@@ -168,7 +168,7 @@ abstract class AbstractValidator implements ValidatorInterface {
             foreach($rules as $ruleIdx => $rule)
             {
                 // get name and parameters
-                @list($name, $params) = explode(":", $rule);
+                @list($name, $params) = array_pad(explode(":", $rule), 2, null);
 
                 // only do someting for the unique rule
                 if(strtolower($name) != "unique") {
