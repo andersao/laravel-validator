@@ -61,7 +61,42 @@ class PostValidator extends LaravelValidator {
 }
 
 ```
-   
+
+### Custom Error Messages
+
+You may use custom error messages for validation instead of the defaults
+
+```php
+
+protected $messages = [
+    'required' => 'The :attribute field is required.',
+];
+
+```
+
+Or, you may wish to specify a custom error messages only for a specific field.
+
+```php
+
+protected $messages = [
+    'email.required' => 'We need to know your e-mail address!',
+];
+
+```
+
+### Custom Attributes
+
+You too may use custom name attributes
+
+```php
+
+protected $attributes = [
+    'email' => 'E-mail',
+    'obs' => 'Observation',
+];
+
+```
+
 ### Using the Validator
 
 ```php

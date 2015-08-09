@@ -37,6 +37,20 @@ abstract class AbstractValidator implements ValidatorInterface {
     protected $rules = array();
 
     /**
+     * Validation Custom Messages
+     *
+     * @var array
+     */
+    protected $messages = array();
+
+    /**
+     * Validation Custom Attributes
+     *
+     * @var array
+     */
+    protected $attributes = array();
+
+    /**
      * Validation errors
      *
      * @var MessageBag
@@ -140,6 +154,48 @@ abstract class AbstractValidator implements ValidatorInterface {
     public function setRules(array $rules)
     {
         $this->rules = $rules;
+        return $this;
+    }
+
+    /**
+     * Get Custom error messages for validation
+     *
+     * @return array
+     */
+    public function getMessages(){
+
+        return $this->messages;
+    }
+
+    /**
+     * Set Custom error messages for Validation
+     *
+     * @return $this
+     */
+    public function setMessages(array $messages)
+    {
+        $this->messages = $messages;
+        return $this;
+    }
+
+    /**
+     * Get Custom error attributes for validation
+     *
+     * @return array
+     */
+    public function getAttributes(){
+
+        return $this->attributes;
+    }
+
+    /**
+     * Set Custom error attributes for Validation
+     *
+     * @return $this
+     */
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
         return $this;
     }
 

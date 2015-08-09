@@ -33,8 +33,10 @@ class LaravelValidator extends AbstractValidator {
      */
     public function passes($action = null)
     {
-        $rules     = $this->getRules($action);
-        $validator = $this->validator->make($this->data, $rules);
+        $rules      = $this->getRules($action);
+        $messages   = $this->getMessages();
+        $attributes = $this->getAttributes();
+        $validator  = $this->validator->make($this->data, $rules, $messages, $attributes);
 
         if( $validator->fails() )
         {
