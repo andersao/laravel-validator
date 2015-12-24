@@ -9,13 +9,17 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "illuminate/support": "~5.0|~5.1",
-        "illuminate/validation": "~5.0|~5.1"
+        "illuminate/support": "~5.0|~5.1|~5.2",
+        "illuminate/validation": "~5.0|~5.1|~5.2"
     },
     "autoload": {
         "psr-4": {
             "Prettus\\Validator\\": "src/Prettus/Validator/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "1.2-dev"
         }
     },
     "minimum-stability": "stable"
