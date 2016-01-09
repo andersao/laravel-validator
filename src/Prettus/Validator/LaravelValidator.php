@@ -3,20 +3,21 @@
 use Illuminate\Validation\Factory;
 
 /**
- * Class LaravelValidator
+ * Class LaravelValidator.
+ *
  * @package Prettus\Validator
  */
-class LaravelValidator extends AbstractValidator {
-
+class LaravelValidator extends AbstractValidator
+{
     /**
-     * Validator
+     * Validator.
      *
      * @var \Illuminate\Validation\Factory
      */
     protected $validator;
 
     /**
-     * Construct
+     * Construct.
      *
      * @param \Illuminate\Validation\Factory $validator
      */
@@ -26,25 +27,25 @@ class LaravelValidator extends AbstractValidator {
     }
 
     /**
-     * Pass the data and the rules to the validator
+     * Pass the data and the rules to the validator.
      *
      * @param string $action
+     *
      * @return bool
      */
     public function passes($action = null)
     {
-        $rules      = $this->getRules($action);
-        $messages   = $this->getMessages();
+        $rules = $this->getRules($action);
+        $messages = $this->getMessages();
         $attributes = $this->getAttributes();
-        $validator  = $this->validator->make($this->data, $rules, $messages, $attributes);
+        $validator = $this->validator->make($this->data, $rules, $messages, $attributes);
 
-        if( $validator->fails() )
-        {
+        if ($validator->fails()) {
             $this->errors = $validator->messages();
+
             return false;
         }
 
         return true;
     }
-
 }
