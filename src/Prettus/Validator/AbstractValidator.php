@@ -55,7 +55,7 @@ abstract class AbstractValidator implements ValidatorInterface {
      *
      * @var MessageBag
      */
-    protected $errors = array();
+    protected $errors = null;
 
 
     /**
@@ -99,6 +99,9 @@ abstract class AbstractValidator implements ValidatorInterface {
      */
     public function errorsBag()
     {
+        if (!$this->errors instanceOf MessageBag) {
+            $this->errors = new MessageBag;
+        }
         return $this->errors;
     }
 
