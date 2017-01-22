@@ -10,13 +10,13 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/support": "~5.0|~5.1",
-        "illuminate/validation": "~5.0|~5.1"
+        "illuminate/support": "~5.4",
+        "illuminate/validation": "~5.4"
     },
     "autoload": {
         "psr-4": {
             "Prettus\\Validator\\": "src/Prettus/Validator/"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "dev"
 }
