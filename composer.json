@@ -5,9 +5,19 @@
     "authors": [
         {
             "name": "Anderson Andrade",
-            "email": "contato@andersonandra.de"
+            "homepage": "http://andersonandra.de",
+            "email": "contato@andersonandra.de",
+            "role": "Developer"
         }
     ],
+    "homepage": "http://andersao.github.io/laravel-validation",
+    "support": {
+        "email": "contato@andersonandra.de",
+        "issues":"https://github.com/andersao/laravel-validation/issues",
+        "wiki":"https://github.com/andersao/laravel-validation",
+        "source":"https://github.com/andersao/laravel-validation",
+        "docs": "http://andersao.github.io/laravel-validation"
+    },
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": "~5.4",
