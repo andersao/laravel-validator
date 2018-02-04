@@ -7,9 +7,10 @@ use Illuminate\Support\MessageBag;
 /**
  * Class ValidatorException
  * @package Prettus\Validator\Exceptions
+ * @author Anderson Andrade <contato@andersonandra.de>
  */
-class ValidatorException extends \Exception implements Jsonable, Arrayable {
-
+class ValidatorException extends \Exception implements Jsonable, Arrayable
+{
     /**
      * @var MessageBag
      */
@@ -18,14 +19,16 @@ class ValidatorException extends \Exception implements Jsonable, Arrayable {
     /**
      * @param MessageBag $messageBag
      */
-    public function __construct(MessageBag $messageBag){
+    public function __construct(MessageBag $messageBag)
+    {
         $this->messageBag = $messageBag;
     }
 
     /**
      * @return MessageBag
      */
-    public function getMessageBag(){
+    public function getMessageBag()
+    {
         return $this->messageBag;
     }
 
@@ -52,5 +55,4 @@ class ValidatorException extends \Exception implements Jsonable, Arrayable {
     {
         return json_encode($this->toArray(), $options);
     }
-
 }
