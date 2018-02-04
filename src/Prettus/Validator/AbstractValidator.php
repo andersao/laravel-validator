@@ -7,6 +7,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 /**
  * Class AbstractValidator
  * @package Prettus\Validator
+ * @author Anderson Andrade <contato@andersonandra.de>
  */
 abstract class AbstractValidator implements ValidatorInterface
 {

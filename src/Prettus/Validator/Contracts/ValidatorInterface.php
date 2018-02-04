@@ -6,6 +6,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 /**
  * Interface ValidatorInterface
  * @package Prettus\Validator\Contracts
+ * @author Anderson Andrade <contato@andersonandra.de>
  */
 interface ValidatorInterface
 {

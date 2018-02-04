@@ -5,6 +5,7 @@ use Illuminate\Contracts\Validation\Factory;
 /**
  * Class LaravelValidator
  * @package Prettus\Validator
+ * @author Anderson Andrade <contato@andersonandra.de>
  */
 class LaravelValidator extends AbstractValidator
 {

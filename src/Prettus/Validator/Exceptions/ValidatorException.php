@@ -7,6 +7,7 @@ use Illuminate\Support\MessageBag;
 /**
  * Class ValidatorException
  * @package Prettus\Validator\Exceptions
+ * @author Anderson Andrade <contato@andersonandra.de>
  */
 class ValidatorException extends \Exception implements Jsonable, Arrayable
 {

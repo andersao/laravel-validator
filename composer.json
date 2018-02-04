@@ -18,5 +18,5 @@
             "Prettus\\Validator\\": "src/Prettus/Validator/"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
