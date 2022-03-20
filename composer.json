@@ -1,6 +1,7 @@
 {
     "name": "prettus/laravel-validation",
     "description": "Laravel Validation Service",
+    "license": "MIT",
     "keywords": ["laravel", "validation", "service"],
     "authors": [
         {
