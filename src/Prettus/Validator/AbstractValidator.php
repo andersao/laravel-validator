@@ -217,11 +217,15 @@ abstract class AbstractValidator implements ValidatorInterface
         }
 
         array_walk($rules, function (&$rules, $field) use ($id) {
-            if (!is_array($rules)) {
+            if (is_string($rules)) {
                 $rules = explode("|", $rules);
             }
 
             foreach ($rules as $ruleIdx => $rule) {
+                if (!is_string($rule)) {
+                    continue;
+                }
+
                 // get name and parameters
                 @list($name, $params) = array_pad(explode(":", $rule), 2, null);
 
