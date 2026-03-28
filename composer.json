@@ -1,6 +1,6 @@
 {
     "name": "prettus/laravel-validation",
-    "description": "Laravel Validation Service",
+    "description": "Laravel Validation Service — supports Laravel 5.4 to 13 and PHP 7.1 to 8.5",
     "keywords": [
         "laravel",
         "validation",
@@ -23,9 +23,12 @@
         "docs": "http://andersao.github.io/laravel-validation"
     },
     "require": {
-        "php": ">=5.4.0",
-        "illuminate/support": "~5.4|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
-        "illuminate/validation": "~5.4|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0"
+        "php": "^7.1|^8.0|^8.4|^8.5",
+        "illuminate/support": "~5.4|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0|^13.0",
+        "illuminate/validation": "~5.4|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0|^13.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0|^11.0"
     },
     "autoload": {
         "psr-4": {
