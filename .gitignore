@@ -1,6 +1,7 @@
 /vendor
 composer.phar
 .DS_Store
+/.phpunit.cache
 ### Composer template
 vendor/
 

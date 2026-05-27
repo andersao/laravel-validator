@@ -1,80 +1,36 @@
-<?php namespace Prettus\Validator\Contracts;
+<?php
+
+declare(strict_types=1);
+
+namespace Prettus\Validator\Contracts;
 
 use Illuminate\Contracts\Support\MessageBag;
 use Prettus\Validator\Exceptions\ValidatorException;
 
-/**
- * Interface ValidatorInterface
- * @package Prettus\Validator\Contracts
- * @author Anderson Andrade <contato@andersonandra.de>
- */
 interface ValidatorInterface
 {
-    const RULE_CREATE = 'create';
-    const RULE_UPDATE = 'update';
+    public const RULE_CREATE = 'create';
+    public const RULE_UPDATE = 'update';
+
+    public function setId(int|string|null $id): static;
+
+    public function with(array $input): static;
+
+    public function passes(?string $action = null): bool;
 
     /**
-     * Set Id
-     *
-     * @param $id
-     * @return $this
-     */
-    public function setId($id);
-
-    /**
-     * With
-     *
-     * @param array
-     * @return $this
-     */
-    public function with(array $input);
-
-    /**
-     * Pass the data and the rules to the validator
-     *
-     * @param string $action
-     * @return boolean
-     */
-    public function passes($action = null);
-
-    /**
-     * Pass the data and the rules to the validator or throws ValidatorException
-     *
      * @throws ValidatorException
-     * @param string $action
-     * @return boolean
      */
-    public function passesOrFail($action = null);
+    public function passesOrFail(?string $action = null): bool;
 
     /**
-     * Errors
-     *
-     * @return array
+     * @return array<int, string>
      */
-    public function errors();
+    public function errors(): array;
 
-    /**
-     * Errors
-     *
-     * @return MessageBag
-     */
-    public function errorsBag();
+    public function errorsBag(): MessageBag;
 
-    /**
-     * Set Rules for Validation
-     *
-     * @param array $rules
-     * @return $this
-     */
-    public function setRules(array $rules);
+    public function setRules(array $rules): static;
 
-    /**
-     * Get rule for validation by action ValidatorInterface::RULE_CREATE or ValidatorInterface::RULE_UPDATE
-     *
-     * Default rule: ValidatorInterface::RULE_CREATE
-     *
-     * @param $action
-     * @return array
-     */
-    public function getRules($action = null);
+    public function getRules(?string $action = null): array;
 }

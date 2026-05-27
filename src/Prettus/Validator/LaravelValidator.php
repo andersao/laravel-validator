@@ -1,46 +1,30 @@
-<?php namespace Prettus\Validator;
+<?php
+
+declare(strict_types=1);
+
+namespace Prettus\Validator;
 
 use Illuminate\Contracts\Validation\Factory;
 
-/**
- * Class LaravelValidator
- * @package Prettus\Validator
- * @author Anderson Andrade <contato@andersonandra.de>
- */
 class LaravelValidator extends AbstractValidator
 {
-    /**
-     * Validator
-     *
-     * @var \Illuminate\Validation\Factory
-     */
-    protected $validator;
-
-    /**
-     * Construct
-     *
-     * @param \Illuminate\Contracts\Validation\Factory $validator
-     */
-    public function __construct(Factory $validator)
+    public function __construct(protected Factory $validator)
     {
-        $this->validator = $validator;
+        parent::__construct();
     }
 
-    /**
-     * Pass the data and the rules to the validator
-     *
-     * @param string $action
-     * @return bool
-     */
-    public function passes($action = null)
+    public function passes(?string $action = null): bool
     {
-        $rules      = $this->getRules($action);
-        $messages   = $this->getMessages();
-        $attributes = $this->getAttributes();
-        $validator  = $this->validator->make($this->data, $rules, $messages, $attributes);
+        $validator = $this->validator->make(
+            $this->data,
+            $this->getRules($action),
+            $this->getMessages(),
+            $this->getAttributes(),
+        );
 
         if ($validator->fails()) {
             $this->errors = $validator->messages();
+
             return false;
         }
 

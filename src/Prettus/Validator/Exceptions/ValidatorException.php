@@ -1,58 +1,38 @@
-<?php namespace Prettus\Validator\Exceptions;
+<?php
 
+declare(strict_types=1);
+
+namespace Prettus\Validator\Exceptions;
+
+use Exception;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
-use Illuminate\Support\MessageBag;
+use Illuminate\Contracts\Support\MessageBag;
 
-/**
- * Class ValidatorException
- * @package Prettus\Validator\Exceptions
- * @author Anderson Andrade <contato@andersonandra.de>
- */
-class ValidatorException extends \Exception implements Jsonable, Arrayable
+class ValidatorException extends Exception implements Arrayable, Jsonable
 {
-    /**
-     * @var MessageBag
-     */
-    protected $messageBag;
-
-    /**
-     * @param MessageBag $messageBag
-     */
-    public function __construct(MessageBag $messageBag)
+    public function __construct(protected readonly MessageBag $messageBag)
     {
-        $this->messageBag = $messageBag;
     }
 
-    /**
-     * @return MessageBag
-     */
-    public function getMessageBag()
+    public function getMessageBag(): MessageBag
     {
         return $this->messageBag;
     }
 
     /**
-     * Get the instance as an array.
-     *
-     * @return array
+     * @return array{error: string, error_description: MessageBag}
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
-            'error'=>'validation_exception',
-            'error_description'=>$this->getMessageBag()
+            'error'             => 'validation_exception',
+            'error_description' => $this->getMessageBag(),
         ];
     }
 
-    /**
-     * Convert the object to its JSON representation.
-     *
-     * @param  int $options
-     * @return string
-     */
-    public function toJson($options = 0)
+    public function toJson($options = 0): string
     {
-        return json_encode($this->toArray(), $options);
+        return json_encode($this->toArray(), $options | JSON_THROW_ON_ERROR);
     }
 }

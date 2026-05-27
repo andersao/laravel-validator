@@ -23,13 +23,25 @@
         "docs": "http://andersao.github.io/laravel-validation"
     },
     "require": {
-        "php": ">=5.4.0",
-        "illuminate/support": "~5.4|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0|^13.0",
-        "illuminate/validation": "~5.4|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0|^13.0"
+        "php": "^8.2",
+        "illuminate/support": "^11.0|^12.0|^13.0",
+        "illuminate/validation": "^11.0|^12.0|^13.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0|^12.0",
+        "orchestra/testbench": "^9.0|^10.0|^11.0"
+    },
+    "scripts": {
+        "test": "phpunit"
     },
     "autoload": {
         "psr-4": {
             "Prettus\\Validator\\": "src/Prettus/Validator/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Prettus\\Validator\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "stable"

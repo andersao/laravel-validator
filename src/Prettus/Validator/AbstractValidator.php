@@ -1,249 +1,142 @@
-<?php namespace Prettus\Validator;
+<?php
 
+declare(strict_types=1);
+
+namespace Prettus\Validator;
+
+use Illuminate\Contracts\Support\MessageBag as MessageBagContract;
 use Illuminate\Support\MessageBag;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 
-/**
- * Class AbstractValidator
- * @package Prettus\Validator
- * @author Anderson Andrade <contato@andersonandra.de>
- */
 abstract class AbstractValidator implements ValidatorInterface
 {
-    /**
-     * @var int
-     */
-    protected $id = null;
+    protected int|string|null $id = null;
 
-    /**
-     * Validator
-     *
-     * @var object
-     */
-    protected $validator;
+    protected array $data = [];
 
-    /**
-     * Data to be validated
-     *
-     * @var array
-     */
-    protected $data = array();
+    protected array $rules = [];
 
-    /**
-     * Validation Rules
-     *
-     * @var array
-     */
-    protected $rules = array();
+    protected array $messages = [];
 
-    /**
-     * Validation Custom Messages
-     *
-     * @var array
-     */
-    protected $messages = array();
+    protected array $attributes = [];
 
-    /**
-     * Validation Custom Attributes
-     *
-     * @var array
-     */
-    protected $attributes = array();
+    protected MessageBagContract $errors;
 
-    /**
-     * Validation errors
-     *
-     * @var MessageBag
-     */
-    protected $errors = array();
+    public function __construct()
+    {
+        $this->errors = new MessageBag();
+    }
 
-
-    /**
-     * Set Id
-     *
-     * @param $id
-     * @return $this
-     */
-    public function setId($id)
+    public function setId(int|string|null $id): static
     {
         $this->id = $id;
+
         return $this;
     }
 
-    /**
-     * Set data to validate
-     *
-     * @param array $data
-     * @return $this
-     */
-    public function with(array $data)
+    public function with(array $input): static
     {
-        $this->data = $data;
+        $this->data = $input;
 
         return $this;
     }
 
     /**
-     * Return errors
-     *
-     * @return array
+     * @return array<int, string>
      */
-    public function errors()
+    public function errors(): array
     {
         return $this->errorsBag()->all();
     }
 
-    /**
-     * Errors
-     *
-     * @return MessageBag
-     */
-    public function errorsBag()
+    public function errorsBag(): MessageBagContract
     {
         return $this->errors;
     }
 
-    /**
-     * Pass the data and the rules to the validator
-     *
-     * @param string $action
-     * @return boolean
-     */
-    abstract public function passes($action = null);
+    abstract public function passes(?string $action = null): bool;
 
     /**
-     * Pass the data and the rules to the validator or throws ValidatorException
-     *
      * @throws ValidatorException
-     * @param string $action
-     * @return boolean
      */
-    public function passesOrFail($action = null)
+    public function passesOrFail(?string $action = null): bool
     {
-        if (!$this->passes($action)) {
+        if (! $this->passes($action)) {
             throw new ValidatorException($this->errorsBag());
         }
 
         return true;
     }
 
-    /**
-     * Get rule for validation by action ValidatorInterface::RULE_CREATE or ValidatorInterface::RULE_UPDATE
-     *
-     * Default rule: ValidatorInterface::RULE_CREATE
-     *
-     * @param null $action
-     * @return array
-     */
-    public function getRules($action = null)
+    public function getRules(?string $action = null): array
     {
         $rules = $this->rules;
 
-        if (isset($this->rules[$action])) {
+        if ($action !== null && isset($this->rules[$action])) {
             $rules = $this->rules[$action];
         }
 
         return $this->parserValidationRules($rules, $this->id);
     }
 
-    /**
-     * Set Rules for Validation
-     *
-     * @param array $rules
-     * @return $this
-     */
-    public function setRules(array $rules)
+    public function setRules(array $rules): static
     {
         $this->rules = $rules;
+
         return $this;
     }
 
-    /**
-     * Get Custom error messages for validation
-     *
-     * @return array
-     */
-    public function getMessages()
+    public function getMessages(): array
     {
         return $this->messages;
     }
 
-    /**
-     * Set Custom error messages for Validation
-     *
-     * @param array $messages
-     * @return $this
-     */
-    public function setMessages(array $messages)
+    public function setMessages(array $messages): static
     {
         $this->messages = $messages;
+
         return $this;
     }
 
-    /**
-     * Get Custom error attributes for validation
-     *
-     * @return array
-     */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
 
-    /**
-     * Set Custom error attributes for Validation
-     *
-     * @param array $attributes
-     * @return $this
-     */
-    public function setAttributes(array $attributes)
+    public function setAttributes(array $attributes): static
     {
         $this->attributes = $attributes;
+
         return $this;
     }
 
-    /**
-     * Parser Validation Rules
-     *
-     * @param $rules
-     * @param null $id
-     * @return array
-     */
-    protected function parserValidationRules($rules, $id = null)
+    protected function parserValidationRules(array $rules, int|string|null $id = null): array
     {
-        if (null === $id) {
+        if ($id === null) {
             return $rules;
         }
 
-        array_walk($rules, function (&$rules, $field) use ($id) {
-            if (!is_array($rules)) {
-                $rules = explode("|", $rules);
-            }
+        foreach ($rules as $field => $fieldRules) {
+            $fieldRules = is_array($fieldRules) ? $fieldRules : explode('|', $fieldRules);
 
-            foreach ($rules as $ruleIdx => $rule) {
-                // get name and parameters
-                @list($name, $params) = array_pad(explode(":", $rule), 2, null);
+            foreach ($fieldRules as $idx => $rule) {
+                [$name, $params] = array_pad(explode(':', $rule, 2), 2, null);
 
-                // only do someting for the unique rule
-                if (strtolower($name) != "unique") {
-                    continue; // continue in foreach loop, nothing left to do here
+                if (strtolower($name) !== 'unique') {
+                    continue;
                 }
 
-                $p = array_map("trim", explode(",", $params));
+                $parts = $params === null ? [] : array_map('trim', explode(',', $params));
+                $parts[0] = $parts[0] ?? '';
+                $parts[1] = $parts[1] ?? $field;
+                $parts[2] = (string) $id;
 
-                // set field name to rules key ($field) (laravel convention)
-                if (!isset($p[1])) {
-                    $p[1] = $field;
-                }
-
-                // set 3rd parameter to id given to getValidationRules()
-                $p[2] = $id;
-
-                $params = implode(",", $p);
-                $rules[$ruleIdx] = $name.":".$params;
+                $fieldRules[$idx] = $name.':'.implode(',', $parts);
             }
-        });
+
+            $rules[$field] = $fieldRules;
+        }
 
         return $rules;
     }
